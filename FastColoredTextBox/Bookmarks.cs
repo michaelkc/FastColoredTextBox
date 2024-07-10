@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -254,3 +255,4 @@ namespace FastColoredTextBoxNS
         }
     }
 }
+#pragma warning restore 1591

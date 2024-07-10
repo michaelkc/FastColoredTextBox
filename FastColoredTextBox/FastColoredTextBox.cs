@@ -28,7 +28,6 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -134,7 +133,7 @@ namespace FastColoredTextBoxNS
             //register type provider
             TypeDescriptionProvider prov = TypeDescriptor.GetProvider(GetType());
             object theProvider =
-                prov.GetType().GetField("Provider", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(prov);
+                prov.GetType().GetField("Provider", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(prov);
             if (theProvider.GetType() != typeof (FCTBDescriptionProvider))
                 TypeDescriptor.AddProvider(new FCTBDescriptionProvider(GetType()), GetType());
             //drawing optimization
@@ -2744,6 +2743,7 @@ namespace FastColoredTextBoxNS
         /// Insert text into current selected position
         /// </summary>
         /// <param name="text"></param>
+        /// <param name="jumpToCaret"></param>
         public virtual void InsertText(string text, bool jumpToCaret)
         {
             if (text == null)
@@ -2778,6 +2778,7 @@ namespace FastColoredTextBoxNS
         /// Insert text into current selection position (with predefined style)
         /// </summary>
         /// <param name="text"></param>
+        /// <param name="style"></param>
         public virtual Range InsertText(string text, Style style)
         {
             return InsertText(text, style, true);
@@ -6354,6 +6355,7 @@ namespace FastColoredTextBoxNS
         /// Finds ranges for given regex pattern
         /// </summary>
         /// <param name="regexPattern">Regex pattern</param>
+        /// <param name="options">Regex options</param>
         /// <returns>Enumeration of ranges</returns>
         public IEnumerable<Range> GetRanges(string regexPattern, RegexOptions options)
         {
@@ -6483,7 +6485,6 @@ namespace FastColoredTextBoxNS
         /// <summary>
         /// Exapnds all folded blocks
         /// </summary>
-        /// <param name="iLine"></param>
         public virtual void ExpandAllFoldingBlocks()
         {
             for (int i = 0; i < LinesCount; i++)
@@ -8416,14 +8417,14 @@ window.status = ""#print"";
         /// <summary>
         /// Footer of page.
         /// Here you can use special codes: &amp;w (Window title), &amp;D, &amp;d (Date), &amp;t(), &amp;4 (Time), &amp;p (Current page number), &amp;P (Total number of pages),  &amp;&amp; (A single ampersand), &amp;b (Right justify text, Center text. If &amp;b occurs once, then anything after the &amp;b is right justified. If &amp;b occurs twice, then anything between the two &amp;b is centered, and anything after the second &amp;b is right justified).
-        /// More detailed see <see cref="http://msdn.microsoft.com/en-us/library/aa969429(v=vs.85).aspx">here</see>
+        /// More detailed see <see href="http://msdn.microsoft.com/en-us/library/aa969429.aspx">here</see>
         /// </summary>
         public string Footer { get; set; }
 
         /// <summary>
         /// Header of page
         /// Here you can use special codes: &amp;w (Window title), &amp;D, &amp;d (Date), &amp;t(), &amp;4 (Time), &amp;p (Current page number), &amp;P (Total number of pages),  &amp;&amp; (A single ampersand), &amp;b (Right justify text, Center text. If &amp;b occurs once, then anything after the &amp;b is right justified. If &amp;b occurs twice, then anything between the two &amp;b is centered, and anything after the second &amp;b is right justified).
-        /// More detailed see <see cref="http://msdn.microsoft.com/en-us/library/aa969429(v=vs.85).aspx">here</see>
+        /// More detailed see <see href="http://msdn.microsoft.com/en-us/library/aa969429.aspx">here</see>
         /// </summary>
         public string Header { get; set; }
 

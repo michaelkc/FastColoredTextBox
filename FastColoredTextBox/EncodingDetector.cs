@@ -91,7 +91,8 @@ namespace FastColoredTextBoxNS
                 return Encoding.UTF8;
 
             if (BOMBytes[0] == 0x2b && BOMBytes[1] == 0x2f && BOMBytes[2] == 0x76)
-                return Encoding.UTF7;
+                throw new NotSupportedException("SYSLIB0001: The UTF-7 encoding is insecure");
+                //return Encoding.UTF7;
 
             if (BOMBytes.Length < 4)
                 return null;
